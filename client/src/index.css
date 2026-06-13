@@ -69,6 +69,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   z-index: 2;
 }
 
+/* Mobile fixes */
+@media (max-width: 600px) {
+  html, body { width: 100%; overflow-x: hidden; }
+}
+
 @media print {
   @page {
     size: A4;

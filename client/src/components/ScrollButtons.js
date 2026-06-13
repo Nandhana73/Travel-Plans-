@@ -49,8 +49,8 @@ export default function ScrollButtons() {
     <Box
       sx={{
         position: "fixed",
-        bottom: 24,
-        right: 24,
+bottom: { xs: 84, sm: 24 },
+right: { xs: 16, sm: 24 },
         display: "flex",
         flexDirection: "column",
         gap: 1,

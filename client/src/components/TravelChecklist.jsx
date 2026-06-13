@@ -47,11 +47,13 @@ export default function TravelChecklist() {
 
   return (
     <div
-      style={{
-        minHeight: "100vh",
-        background: "#f8fafc",
-        fontFamily: "'DM Sans', sans-serif",
-      }}
+        style={{
+          minHeight: "100vh",
+          background: "#f8fafc",
+          fontFamily: "'DM Sans', sans-serif",
+          width: "100%",
+          overflowX: "hidden",
+        }}
     >
       {/* Header */}
       <div
@@ -67,9 +69,9 @@ export default function TravelChecklist() {
           to="/"
           style={{
             position: "absolute",
-            left: "clamp(16px, 4vw, 32px)",
-            top: "50%",
-            transform: "translateY(-50%)",
+            left: "clamp(12px, 3.5vw, 24px)",
+            top: "clamp(14px, 2.8vw, 22px)",
+            transform: "none",
             color: "#fff",
             textDecoration: "none",
             display: "flex",
@@ -79,6 +81,8 @@ export default function TravelChecklist() {
             fontWeight: 500,
             opacity: 0.9,
             transition: "opacity 0.2s",
+            zIndex: 2,
+            whiteSpace: "nowrap",
           }}
           onMouseOver={(e) => (e.currentTarget.style.opacity = "1")}
           onMouseOut={(e) => (e.currentTarget.style.opacity = "0.9")}
@@ -90,6 +94,7 @@ export default function TravelChecklist() {
             fontSize: "clamp(1.75rem, 4vw, 2.5rem)",
             margin: "0 0 8px",
             fontWeight: 700,
+            paddingTop: "clamp(18px, 4.5vw, 34px)",
           }}
         >
           Travel Checklist Generator
@@ -117,6 +122,7 @@ export default function TravelChecklist() {
           display: "flex",
           flexDirection: "column",
           gap: "24px",
+          alignItems: "stretch",
         }}
       >
         {/* Input Form Card */}
@@ -133,11 +139,22 @@ export default function TravelChecklist() {
             onSubmit={handleGenerate}
             style={{
               display: "flex",
+              flexDirection: "row",
               gap: "12px",
               flexWrap: "wrap",
+              alignItems: "flex-start",
             }}
           >
-            <div style={{ flex: 1, minWidth: "250px" }}>
+            <div
+              style={{
+                flex: 1,
+                minWidth: "250px",
+                display: "flex",
+                flexDirection: "column",
+                marginTop: "8px",
+              }}
+            >
+
               <input
                 value={destination}
                 placeholder="Where are you going? (e.g., London, Dubai, Paris)"
@@ -175,6 +192,9 @@ export default function TravelChecklist() {
                 cursor: "pointer",
                 transition: "background-color 0.2s, transform 0.1s",
                 flexShrink: 0,
+                flexGrow: 0,
+                height: "fit-content",
+                marginTop: "8px",
               }}
               onMouseOver={(e) =>
                 (e.currentTarget.style.backgroundColor = "#fa5a44")
@@ -260,7 +280,8 @@ export default function TravelChecklist() {
             </div>
 
             {/* Progress Bar */}
-            <div style={{ marginBottom: "24px" }}>
+            <div style={{ marginBottom: "34px" }}>
+
               <div
                 style={{
                   display: "flex",
@@ -299,7 +320,7 @@ export default function TravelChecklist() {
 
             {/* Checklist Items */}
             <div
-              style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+              style={{ display: "flex", flexDirection: "column", gap: "10px", marginTop: "10px" }}
             >
               {list.map((item, i) => (
                 <div
