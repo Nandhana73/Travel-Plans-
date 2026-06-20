@@ -1,15 +1,37 @@
 // src/pages/About.js
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import ScrollLink from "../components/ScrollLink";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import "./Home.css"; // reuse same styles
 
 const About = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setScrolled(currentScrollY > 20);
+
+      if (currentScrollY > lastScrollY.current && currentScrollY > 80) {
+        setVisible(false);
+      } else {
+        setVisible(true);
+      }
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div className="wander-page">
       {/* ═══ HEADER (same as Home) ═══ */}
-      <nav className="wander-nav">
+      <nav className={`wander-nav ${scrolled ? "wander-nav-scrolled" : ""} ${visible ? "" : "wander-nav-hidden"}`}>
         <Link to="/" className="wander-logo">
           Pack<span>Go</span>
         </Link>
