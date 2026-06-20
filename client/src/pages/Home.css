@@ -42,12 +42,17 @@ html {
   z-index: 1000;
   transition:
     box-shadow 0.25s ease,
-    background 0.25s ease;
+    background 0.25s ease,
+    transform 0.3s ease-in-out;
 }
 
 .wander-nav-scrolled {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
   background: rgba(253, 250, 245, 0.98);
+}
+
+.wander-nav-hidden {
+  transform: translateY(-100%);
 }
 
 #wander-dest-section,

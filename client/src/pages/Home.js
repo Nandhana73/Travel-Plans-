@@ -402,6 +402,8 @@ const Home = () => {
   const [showRecentSearches, setShowRecentSearches] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const lastScrollY = useRef(0);
   const [activeSection, setActiveSection] = useState("wander-dest-section");
   const checkInRef = useRef(null);
 
@@ -451,13 +453,21 @@ const Home = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      const currentScrollY = window.scrollY;
+      setScrolled(currentScrollY > 20);
+
+      if (currentScrollY > lastScrollY.current && currentScrollY > 80 && !mobileOpen) {
+        setVisible(false);
+      } else {
+        setVisible(true);
+      }
+      lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener("scroll", handleScroll);
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [mobileOpen]);
   useEffect(() => {
     const sections = [
       "wander-dest-section",
@@ -542,7 +552,7 @@ const Home = () => {
   return (
     <div className="wander-page">
       {/* ═══ NAVBAR ═══ */}
-      <nav className={`wander-nav ${scrolled ? "wander-nav-scrolled" : ""}`}>
+      <nav className={`wander-nav ${scrolled ? "wander-nav-scrolled" : ""} ${visible ? "" : "wander-nav-hidden"}`}>
         <Link to="/" className="wander-logo">
           Pack<span>Go</span>
         </Link>
