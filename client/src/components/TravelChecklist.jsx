@@ -117,7 +117,7 @@ export default function TravelChecklist() {
       <div
         style={{
           maxWidth: "800px",
-          margin: "-24px auto 48px",
+          margin: "24px auto 48px",
           padding: "0 16px",
           display: "flex",
           flexDirection: "column",
